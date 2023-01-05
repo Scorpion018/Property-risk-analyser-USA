@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draft Details</title>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqgZXdzQBgmeEb_2qniK2Js3abzYdIshg&callback=initMap">
+    </script>
+  <script>
+    function initMap(lat, lng) {
+      var myLatLng = {
+        // lat: 35.086468,
+        // lng: -80.887026,
+        lat: parseFloat('<%= lati %>'),
+        lng: parseFloat('<%= longi %>')
+      };
+      console.log(myLatLng)
+      var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: myLatLng,
+      });
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+      });
+    }
+
+  </script>
+  <style>
+    .low {
+      color: green;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .significant {
+      color: greenyellow;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .high {
+      color: orange;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .veryHigh {
+      color: rgb(209, 82, 31);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .extreme {
+      color: rgb(255, 0, 0);
+      font-size: 18px;
+      font-weight: 800;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+    <%path.forEach(function(details){%>
+      <div style="width: 100%; overflow: hidden; display: flex;">
+        <div>
+          <div id="map" style="width: 320px; height: 450px;">
+          </div>
+        </div>
+        <div style="width: 600px; height: 600px; float: left; margin-left: 50px;">
+          <div>
+            <h2>Company Name : "<%= details.company_name %>"
+            </h2>
+            <!-- <p>Street Name : <%= details.propertyaddressstreetname %></p> -->
+            <p>Street Address : <%= details.street_address %> , <%= details.city %>
+            </p>
+            <p>State: <%= details.state %>
+            </p>
+            <p>ZIP CODE : <%= details.zip_code %>
+            </p>
+            <p>City : <%= details.city %>
+            </p>
+            <p>Industry Type : <%= details.industry_description %>
+            </p>
+          </div>
+          <div style="margin-top:60px">
+            <h2>Climate Hazards</h2>
+            <p>Heat Risk :<%if(details.heatriskscore < 19){ %>
+                <span class="low">Low</span>
+                <%} else if(details.heatriskscore < 39) {%>
+                  <span class="significant">Significant</span>
+                  <%} else if(details.heatriskscore < 59) {%>
+                    <span class="high">High</span>
+                    <%} else if(details.heatriskscore < 79) {%>
+                      <span class="veryHigh">Very High</span>
+                      <%} else {%>
+                        <span class="extreme">Extreme</span>
+                        <%}%>
+            </p>
+            <p>Storm Risk : <%if(details.stormriskscore < 19){ %>
+                <span class="low">Low</span>
+                <%} else if(details.stormriskscore < 39) {%>
+                  <span class="significant">Significant</span>
+                  <%} else if(details.stormriskscore < 59) {%>
+                    <span class="high">High</span>
+                    <%} else if(details.stormriskscore < 79) {%>
+                      <span class="veryHigh">Very High</span>
+                      <%} else {%>
+                        <span class="extreme">Extreme</span>
+                        <%}%>
+            </p>
+            <p>Wildfire Risk : <%if(details.wildfireriskscore < 19){ %>
+                <span class="low">Low</span>
+                <%} else if(details.wildfireriskscore < 39) {%>
+                  <span class="significant">Significant</span>
+                  <%} else if(details.wildfireriskscore < 59) {%>
+                    <span class="high">High</span>
+                    <%} else if(details.wildfireriskscore < 79) {%>
+                      <span class="veryHigh">Very High</span>
+                      <%} else {%>
+                        <span class="extreme">Extreme</span>
+                        <%}%>
+            </p>
+            <p>Drought Risk : <%if(details.droughtriskscore < 19){ %>
+                <span class="low">Low</span>
+                <%} else if(details.droughtriskscore < 39) {%>
+                  <span class="significant">Significant</span>
+                  <%} else if(details.droughtriskscore < 59) {%>
+                    <span class="high">High</span>
+                    <%} else if(details.droughtriskscore < 79) {%>
+                      <span class="veryHigh">Very High</span>
+                      <%} else {%>
+                        <span class="extreme">Extreme</span>
+                        <%}%>
+            </p>
+            <p>Flood Risk : <%if(details.floodriskscore < 19){ %>
+                <span class="low">Low</span>
+                <%} else if(details.floodriskscore < 39) {%>
+                  <span class="low">Significant</span>
+                  <%} else if(details.floodriskscore < 59) {%>
+                    <span class="low">High</span>
+                    <%} else if(details.floodriskscore < 79) {%>
+                      <span class="low">Very High</span>
+                      <%} else {%>
+                        <span class="low">Extreme</span>
+                        <%}%>
+            </p>
+          </div>
+        </div>
+        <div style=" margin-top: 0px;">
+          <div>
+            <h2>Property Details</h2>
+            <p>Latitude : <%= details.propertylatitude %>
+            </p>
+            <p>Longitude : <%= details.propertylongitude %>
+            </p>
+          </div>
+          <div style="margin-top: 100px;">
+            <h2>Illness/Death Details</h2>
+            <p>Total Deaths: <%= details.total_deaths %>
+            </p>
+            <p>Total Injuries: <%= details.total_injuries %>
+            </p>
+            <p>Total Poisoning: <%= details.total_poisonings %>
+            </p>
+            <p>Respiratory Coditions: <%= details.total_respiratory_conditions %>
+            </p>
+            <p>Skin Disorder: <%= details.total_skin_disorders %>
+            </p>
+            <p>Hearing Loss: <%= details.total_hearing_loss %>
+            </p>
+          </div>
+          <div style="display: flex;">
+            <h1>Total Risk : </h1>
+            <h1>
+              <%if(details.totalrisk < 19){ %>
+                <span style="font-size: 37px; " class="low"> Low</span>
+                <%} else if(details.totalrisk < 39) {%>
+                  <span style="font-size: 37px;" class="significant"> Significant</span>
+                  <%} else if(details.totalrisk < 59) {%>
+                    <span style="font-size: 37px;" class="high"> High</span>
+                    <%} else if(details.totalrisk < 79) {%>
+                      <span style="font-size: 37px;" class="veryHigh"> Very High</span>
+                      <%} else {%>
+                        <span style="font-size: 37px;" class="extreme"> Extreme</span>
+                        <%}%>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <%})%>
+  </div>
+  <div>
+    <h2>List of Hazard Products from the Company</h2>
+    <%path1.forEach(function(recalls){%>
+      <%if(recalls.Title=''){ %>
+        <h2>No Hazard Products found </h2>
+        <h2>
+        </h2>
+        <%} else {%>
+          <h3>
+            <a href="<%= recalls.URL %>" target="_blank">
+              <%= recalls.Title %>
+            </a>
+          </h3>
+          <p>
+            <%= recalls.Description %>
+          </p>
+          <%}%>
+            <%})%>
+
+  </div>
+</body>
+<!-- 8538 PARK ROAD -->
+<!-- Harris Teeter -->
+
+</html>

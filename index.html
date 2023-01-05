@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" initial-scale=1.0" />
+  <script type="text/javascript">
+    function showDiv(select) {
+      if (select.value == 1) {
+        document.getElementById('floodDiv').style.display = "block";
+        document.getElementById('earthquakeDiv').style.display = "none";
+        document.getElementById('watersourceDiv').style.display = "none";
+      } else if (select.value == 0) {
+        document.getElementById('watersourceDiv').style.display = "block";
+        document.getElementById('earthquakeDiv').style.display = "none";
+        document.getElementById('floodDiv').style.display = "none";
+
+      } else {
+        document.getElementById('earthquakeDiv').style.display = "block";
+        document.getElementById('watersourceDiv').style.display = "none";
+        document.getElementById('floodDiv').style.display = "none";
+      }
+    } 
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      color: black;
+    }
+
+    .box {
+      top: 40%;
+      left: 20%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 370px;
+      height: 480px;
+      background: #222;
+      opacity: 0.4;
+      border: solid black;
+      background-color: transparent;
+    }
+
+    .input-fields,
+    .select-items,
+    .inputOsha {
+      top: 40%;
+      right: -18%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+    }
+
+    .input-fields {
+      top: 40%;
+      left: 20%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+    }
+
+    .input-fields input[type="text"] {
+      border: 3px solid #2196f3;
+      border-radius: 40px;
+      display: block;
+      padding: 8px;
+      text-align: left;
+      color: black;
+      transition: 440ms;
+      background: none;
+      outline: none;
+      margin: 30px auto;
+      width: 200px;
+    }
+
+    .input-fields input[type="submit"] {
+      cursor: pointer;
+      background: none;
+      border-radius: 40px;
+      border: 3px solid #2196f3;
+      outline: none;
+      padding: 6px;
+      width: 100px;
+      margin: 10px auto;
+      color: black;
+      transition: 440ms;
+      font-weight: bold;
+      display: block;
+    }
+
+    .input-fields input[type="submit"]:hover {
+      background: #2196f3;
+      width: 120px;
+    }
+
+    .input-fields input[type="text"]:focus {
+      border: 3px solid #e74c3c;
+      width: 190px;
+    }
+
+    .titleRecall {
+      margin-left: -8%;
+    }
+
+    .titelDesc {
+      margin-left: -5%;
+    }
+
+    .cpscRecall {
+      top: 8%;
+      left: 15%;
+      position: absolute;
+      font-size: 30px;
+    }
+  </style>
+</head>
+
+<body style="margin-top: 50px;" align="center" class="allelements">
+  <div>
+    <div class="body-image"></div>
+    <div class="box"></div>
+    <div class="profile-text">
+      <h4 class="cpscRecall">DRAFT - CNA</h4>
+    </div>
+    <div class="input-fields">
+      <form action='/draft' method="post">
+        <label class="titleRecall">Company Name : </label>
+        <input type="text" name="companyName" placeholder="Ex : Applied Control Equipment"><br />
+        <label class="titleRecall">Comp Address : </label>
+        <input type="text" name="compAddress" placeholder="Ex : 80112" />
+        <input type='submit' value="SEARCH" /></br></br>
+      </form>
+    </div>
+  </div>
+</body>
+</body>
+<!-- Applied Control Equipment, LLLP Applied Control Equipment, LLLP Englewood CO 80112 -->
+
+</html>
